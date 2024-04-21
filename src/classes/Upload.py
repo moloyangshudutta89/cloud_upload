@@ -1,5 +1,4 @@
 from lib import aws, gcs, common
-import os
 
 class Upload:
 
