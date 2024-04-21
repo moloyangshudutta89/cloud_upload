@@ -1,11 +1,15 @@
 import boto3, os
 from botocore.exceptions import NoCredentialsError
-from multiprocessing.pool import ThreadPool
 
-def upload_to_aws(local_files):
-    s3 = boto3.client('s3', aws_access_key_id=os.getenv('AWS_ACCESS_KEY'),
-                      aws_secret_access_key=os.getenv('AWS_SECRET_KEY'))
-    bucket = os.getenv('AWS_BUCKET_NAME')
+def upload_to_aws(local_files, aws_access_key, aws_secret_key, aws_bucket_name):
+
+    if not local_files:
+        print("Files list is empty for AWS!!")
+        return False
+
+    s3 = boto3.client('s3', aws_access_key_id=aws_access_key,
+                      aws_secret_access_key=aws_secret_key)
+    bucket = aws_bucket_name
 
     object_prefix = ''
 
@@ -20,6 +24,7 @@ def upload_to_aws(local_files):
                 return False
             except Exception as e:
                 print(e)
+                return False
     except NoCredentialsError:
         print("Credentials not available")
         return False
