@@ -1,5 +1,4 @@
 from lib import aws, gcs, common
-import os
 
 class Upload:
 
@@ -10,7 +9,7 @@ class Upload:
                 "AWS_SECRET_KEY":"", 
                 "AWS_BUCKET_NAME":"cloudupload", 
                 "GCS_BUCKET": "gc-cloud-upload", 
-                "GCS_CREDENTIALS":"gcs.json"
+                "GCS_CREDENTIALS":"/gcs.json"
                 }
 
     @staticmethod

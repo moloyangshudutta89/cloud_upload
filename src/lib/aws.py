@@ -1,5 +1,6 @@
 import boto3, os
 from botocore.exceptions import NoCredentialsError
+import threading
 
 def upload_to_aws(local_files, aws_access_key, aws_secret_key, aws_bucket_name):
 
@@ -12,13 +13,15 @@ def upload_to_aws(local_files, aws_access_key, aws_secret_key, aws_bucket_name):
     bucket = aws_bucket_name
 
     object_prefix = ''
-
+    threads = []
     try:
         for local_file in local_files:
             try:
                 file_name = os.path.basename(local_file)
                 object_key = os.path.join(object_prefix, file_name).replace('\\', '/')
-                s3.upload_file(local_file, bucket, object_key)
+                thread = threading.Thread(target=s3.upload_file, args=(local_file, bucket, object_key))
+                threads.append(thread)
+                thread.start()
             except FileNotFoundError:
                 print("The file was not found")
                 return False
@@ -28,5 +31,8 @@ def upload_to_aws(local_files, aws_access_key, aws_secret_key, aws_bucket_name):
     except NoCredentialsError:
         print("Credentials not available")
         return False
+    
+    for thread in threads:
+        thread.join()
 
     return True
