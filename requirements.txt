@@ -1,0 +1,23 @@
+python-dotenv
+pytest
+boto3==1.20.24
+google-cloud-storage>=2.3.0
+# APScheduler==3.8.1
+# awscli==1.22.24
+# botocore==1.23.24
+# charset-normalizer==2.0.10
+# click==8.0.3
+# docutils==0.15.2
+# MarkupSafe==2.0.1
+# pyasn1==0.4.8
+# pycodestyle==2.10.0
+# pycparser==2.21
+# python-dateutil==2.8.2
+# pytz==2021.3
+# pytz-deprecation-shim==0.1.0.post0
+# requests==2.27.0
+# s3transfer==0.5.0
+# tomli==2.0.1
+# tzdata==2022.7
+# tzlocal==4.2
+# Werkzeug==2.0.2
