@@ -2,22 +2,19 @@ from lib import aws, gcs, common
 
 class Upload:
 
-    cred_dict = {
-                "FILE_TYPES_AWS":[".jpg", ".png", ".svg", ".webp", ".mp3", ".mp4", ".mpeg4", ".wmv", ".3gp", ".webm"], 
-                "FILE_TYPES_GCC":[".doc", ".docx", ".csv", ".pdf"], 
-                "AWS_ACCESS_KEY":"",
-                "AWS_SECRET_KEY":"", 
-                "AWS_BUCKET_NAME":"cloudupload", 
-                "GCS_BUCKET": "gc-cloud-upload", 
-                "GCS_CREDENTIALS":"gcs.json"
-                }
+    cred_dict = {}
 
-    @staticmethod
-    def read_from_dir(directory):
+    def __init__(self, directory, cred):
+        if not cred:
+            raise ValueError("Credentials required!!")
+        Upload.cred_dict = cred
+        self.directory = directory
 
-        if directory:
-            print(f"Reading files from directory: {directory}")
-            files = common.list_files(directory)
+    def read_from_dir(self):
+
+        if self.directory:
+            print(f"Reading files from directory: {self.directory}")
+            files = common.list_files(self.directory)
             if len(files) > 0:
                 cloud_upload = common.fileType(files, Upload.cred_dict["FILE_TYPES_AWS"], Upload.cred_dict["FILE_TYPES_GCC"])
                 if len(cloud_upload["aws"]) > 0:
