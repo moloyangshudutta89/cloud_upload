@@ -15,6 +15,7 @@ def upload_to_bucket(files, gcs_bucket, gcs_credential):
     threads = []
     for local_file in files:
         try:
+            ###Creating new thread for each file upload to run in parallel####
             thread = threading.Thread(target=upload_to_gcs, args=(gcs_bucket,gcs_credential,local_file))
             threads.append(thread)
             thread.start()

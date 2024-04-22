@@ -1,5 +1,6 @@
 import os, pathlib
 
+###function to check file type of a given file####
 def fileType(files,aws_files,gcs_files):
     fileType_dict = {"aws":[],"gcc":[]}
     if not files:
@@ -13,6 +14,7 @@ def fileType(files,aws_files,gcs_files):
 
     return fileType_dict
 
+###Function to scan a directory for files####
 def list_files(directory):
     if directory:
         filesList = []

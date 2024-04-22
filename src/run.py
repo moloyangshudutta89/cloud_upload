@@ -13,5 +13,6 @@ from classes.Upload import Upload
 cred_dict = {}
 
 path = "C:/Users/clb89/OneDrive/Desktop/my_projects/files"
+###creating class object for scanning a directory and uploading to bucket###
 upload = Upload(path, cred_dict)
 upload.read_from_dir()
